@@ -29,19 +29,19 @@
 
     train = $("#name-input").val().trim();
     dest = $("#dest-input").val().trim();
-    firstTrain = $("#first-train").val().trim();
-    freq = $("#freq-input").val().trim();
+    firstT = $("#first-train").val().trim();
+    freq = parseInt($("#freq-input").val().trim());
 
       //debug
       console.log(train);
       console.log(dest);
-      console.log(firstTrain);
+      console.log(firstT);
       console.log(freq);
 
     database.ref().push({
       train: train,
       dest: dest,
-      firstT: firstTrain,
+      firstT: firstT,
       freq: freq
     });
 
@@ -66,17 +66,18 @@
 
     var train = childSnapshot.val().train;
     var dest = childSnapshot.val().dest;
-    var firstTrain = childSnapshot.val().firstTrain;
-    var freq = childSnapshot.val().freq;
+    var firstT = childSnapshot.val().firstT;
+    var freq = parseInt(childSnapshot.val().freq);
 
-    var firstTConverted = moment(firstTrain, "hh:mm").subtract(1, "years");
+    var firstTConverted = moment(firstT, "hh:mm").subtract(1, "years");
       console.log(firstTConverted); 
     var currentTime = moment();
       console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-    var diffTime = moment().diff(moment(firstTConverted, "minutes"));
+    var diffTime = parseInt(moment().diff(moment(firstTConverted, "minutes")));
       console.log("DIFFERENCE IN TIME: " + diffTime);
+      debugger;
     var tRemainder = diffTime % freq;
-      console.log(tRemainder);
+      console.log(parseInt(tRemainder));
     var minAway = freq - tRemainder;
       console.log("MINUTES TILL TRAIN: " + minAway);
     var next = moment().add(minAway, "minutes");
@@ -88,10 +89,10 @@
         //train info
           console.log(train);
           console.log(dest);
-          console.log(firstTrain);
+          console.log(firstT);
           console.log(freq);
           console.log(minAway);
-          console.log(next);
+          console.log(nextArrival);
 
 
     $("#trainTable > tbody").append("<tr><td>"+ train + "</td><td>" + dest + "</td><td>" + freq + "</td><td>" + nextArrival + "</td><td>" + minAway + "</td></tr>");
