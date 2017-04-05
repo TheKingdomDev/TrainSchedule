@@ -33,10 +33,10 @@
     freq = parseInt($("#freq-input").val().trim());
 
       //debug
-      console.log(train);
-      console.log(dest);
-      console.log(firstT);
-      console.log(freq);
+      // console.log(train);
+      // console.log(dest);
+      // console.log(firstT);
+      // console.log(freq);
 
     database.ref().push({
       train: train,
@@ -62,7 +62,7 @@
     database.ref().on("child_added", function(childSnapshot) {
 
 
-    console.log(childSnapshot.val());
+    // console.log(childSnapshot.val());
 
     var train = childSnapshot.val().train;
     var dest = childSnapshot.val().dest;
@@ -70,16 +70,16 @@
     var freq = parseInt(childSnapshot.val().freq);
 
     var firstTConverted = moment(firstT, "hh:mm").subtract(1, "years");
-      console.log(firstTConverted); 
+      // console.log(firstTConverted); 
     var currentTime = moment();
-      console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+      // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
     var diffTime = parseInt(moment().diff(moment(firstTConverted, "minutes")));
-      console.log("DIFFERENCE IN TIME: " + diffTime);
-      debugger;
+      // console.log("DIFFERENCE IN TIME: " + diffTime);
+      // debugger;
     var tRemainder = diffTime % freq;
-      console.log(parseInt(tRemainder));
+      // console.log(parseInt(tRemainder));
     var minAway = freq - tRemainder;
-      console.log("MINUTES TILL TRAIN: " + minAway);
+      // console.log("MINUTES TILL TRAIN: " + minAway);
     var next = moment().add(minAway, "minutes");
     var nextArrival = moment(next).format("hh:mm");
 
@@ -87,17 +87,17 @@
       console.log("ARRIVAL TIME: " + moment(next).format("hh:mm"));
 
         //train info
-          console.log(train);
-          console.log(dest);
-          console.log(firstT);
-          console.log(freq);
-          console.log(minAway);
-          console.log(nextArrival);
+          // console.log(train);
+          // console.log(dest);
+          // console.log(firstT);
+          // console.log(freq);
+          // console.log(minAway);
+          // console.log(nextArrival);
 
 
     $("#trainTable > tbody").append("<tr><td>"+ train + "</td><td>" + dest + "</td><td>" + freq + "</td><td>" + nextArrival + "</td><td>" + minAway + "</td></tr>");
 
     },  function (errorObject){
-          console.log("The read failed" + errorObject.code);
+          // console.log("The read failed" + errorObject.code);
   });
 
